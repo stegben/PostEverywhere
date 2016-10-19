@@ -52,6 +52,12 @@ for url in POST_URL:
     except:
         print "[*] Get post exception: ",sys.exc_info()[0]
         continue
+
+    # Try to reveall all the hidden comments
+    try:
+        post_div.find_elements_by_class_name('clearfix')[-1].find_element_by_class_name('UFIPagerLink').click()
+    except:
+        print "[*] Get hidden comments exception: ",sys.exc_info()[0]
     
     # Try to go through all the showed comments
     try:
