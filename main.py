@@ -38,7 +38,7 @@ for url in POST_URL:
         continue
     
     # TODO
-    # The comments of the post will not show automatically
+    # The comments of the post will not be popped out automatically
     # Current solution: log-in (and log-in will show more comments automatically )
 
 
@@ -63,6 +63,11 @@ for url in POST_URL:
     try:
         comment_list = post_div.find_elements_by_class_name('UFICommentContentBlock')
         for comment_block in comment_list:
+            try:
+                if comment_block.get_attribute('aria-label') == 'Comment reply': # Reply to the comments
+                    continue
+            except:
+                tmp = 0 # Do nothing
             try:
                 user_profile = comment_block.find_element_by_css_selector("a")
                 user_profile_url = user_profile.get_attribute('href')
